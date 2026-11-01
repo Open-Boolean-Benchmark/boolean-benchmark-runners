@@ -205,4 +205,4 @@ If a variant narrows its preconditions, the capability fields must reflect that.
 
 ## Full example
 
-See [cgal/6.1.1/nef/exact_homogeneous_integer/runner.yaml](../cgal/6.1.1/nef/exact_homogeneous_integer/runner.yaml) for a complete manifest with two public variants (`regularized`, `non_regularized`) extending a single internal `base`.
+See the CGAL Nef runner's `cgal/<version>/nef/exact_homogeneous_integer/runner.yaml` (under [cgal/](../cgal/); the version folder moves with each bump) for a complete manifest with two public variants (`regularized`, `non_regularized`) extending a single internal `base`.
