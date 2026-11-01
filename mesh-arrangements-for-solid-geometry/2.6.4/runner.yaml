@@ -1,16 +1,16 @@
 runner:
   family: mesh-arrangements-for-solid-geometry
-  version: "2.6.0"
+  version: "2.6.4"
   policy: latest
   algorithm: boolean
   material_variant: null
-  runner_id: mesh-arrangements-for-solid-geometry-2.6.0-boolean
-  display_name: "Mesh Arrangements for Solid Geometry 2.6.0"
+  runner_id: mesh-arrangements-for-solid-geometry-2.6.4-boolean
+  display_name: "Mesh Arrangements for Solid Geometry 2.6.4"
 
 upstream:
   source: git
   url: https://github.com/libigl/libigl.git
-  ref: v2.6.0
+  ref: v2.6.4
 
 build:
   script: ./build.py
@@ -44,13 +44,13 @@ variants:
   - id: default
     extends: base
     label: "Default"
-    display_name: "Mesh Arrangements for Solid Geometry 2.6.0"
+    display_name: "Mesh Arrangements for Solid Geometry 2.6.4"
     color: "#607D8B"
     args: []
 
 notes:
   - "Paper: Zhou, Grinspun, Zorin, Jacobson — Mesh Arrangements for Solid Geometry (SIGGRAPH 2016)"
-  - "Implementation: igl::copyleft::cgal::mesh_boolean from libigl v2.6.0"
+  - "Implementation: igl::copyleft::cgal::mesh_boolean from libigl v2.6.4"
   - "Mesh type: Eigen::MatrixXd (Vx3 f64 verts) + Eigen::MatrixXi (Fx3 int faces)"
   - "Raw mesh format: indexed-tris-f64 (via runner_mesh_helpers)"
   - "io_ms (load-mesh): file → flat double verts + int indices"

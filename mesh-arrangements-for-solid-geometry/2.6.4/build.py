@@ -6,11 +6,11 @@
 # ]
 # ///
 """
-build.py — Runner build script for mesh-arrangements-for-solid-geometry/2.6.0/boolean
+build.py — Runner build script for mesh-arrangements-for-solid-geometry/2.6.4/boolean
 
 Responsibilities:
   1. Bootstrap vcpkg from extern/vcpkg/ (skipped if already bootstrapped)
-  2. Clone libigl at v2.6.0 into download/libigl/ (skipped if already present)
+  2. Clone libigl at v2.6.4 into download/libigl/ (skipped if already present)
      libigl is header-only; no submodule initialisation required.
   3. Configure and build the adapter via CMake (vcpkg toolchain installs
      eigen3, cgal, and nlohmann-json automatically during configure;
@@ -68,7 +68,7 @@ BIN_DIR       = RUNNER_DIR / "bin"
 LIBIGL_CLONE  = DOWNLOAD_DIR / "libigl"
 
 LIBIGL_GIT_URL = "https://github.com/libigl/libigl.git"
-LIBIGL_TAG     = "v2.6.0"
+LIBIGL_TAG     = "v2.6.4"
 
 
 
@@ -139,7 +139,7 @@ def cmake_build(mode: str) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build mesh_arrangements_runner for libigl 2.6.0 boolean benchmark."
+        description="Build mesh_arrangements_runner for libigl 2.6.4 boolean benchmark."
     )
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
@@ -184,7 +184,7 @@ def main() -> int:
             "url":              LIBIGL_GIT_URL,
             "requested_ref":    LIBIGL_TAG,
             "resolved_commit":  libigl_commit,
-            "resolved_version": "2.6.0",
+            "resolved_version": "2.6.4",
         },
         toolchain=toolchain,
     )

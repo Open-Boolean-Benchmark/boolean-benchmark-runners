@@ -4,7 +4,7 @@
 // Execution contract:
 //   mesh_arrangements_runner --request <request.json> --result <result.json>
 //
-// Uses igl::copyleft::cgal::mesh_boolean from libigl v2.6.0 for boolean
+// Uses igl::copyleft::cgal::mesh_boolean from libigl v2.6.4 for boolean
 // operations on triangulated meshes (Zhou, Grinspun, Zorin, Jacobson —
 // "Mesh Arrangements for Solid Geometry", SIGGRAPH 2016).
 //
