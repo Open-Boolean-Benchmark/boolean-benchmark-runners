@@ -6,11 +6,11 @@
 # ]
 # ///
 """
-build.py — Runner build script for geogram/1.10.0/boolean
+build.py — Runner build script for geogram/1.10.1/boolean
 
 Responsibilities:
   1. Bootstrap vcpkg from extern/vcpkg/ (skipped if already bootstrapped)
-  2. Clone geogram at v1.10.0 into download/geogram/ (skipped if already present)
+  2. Clone geogram at v1.10.1 into download/geogram/ (skipped if already present)
   3. Configure and build the adapter via CMake (vcpkg toolchain installs
      nlohmann-json automatically during configure; geogram itself is built via
      add_subdirectory inside CMakeLists.txt)
@@ -69,7 +69,7 @@ BIN_DIR         = RUNNER_DIR / "bin"
 GEOGRAM_CLONE   = DOWNLOAD_DIR / "geogram"
 
 GEOGRAM_GIT_URL = "https://github.com/BrunoLevy/geogram.git"
-GEOGRAM_TAG     = "v1.10.0"
+GEOGRAM_TAG     = "v1.10.1"
 
 
 
@@ -151,7 +151,7 @@ def cmake_build(mode: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build geogram_runner for geogram 1.10.0 boolean benchmark.")
+    parser = argparse.ArgumentParser(description="Build geogram_runner for geogram 1.10.1 boolean benchmark.")
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
     parser.add_argument("--clean", action="store_true",
@@ -195,7 +195,7 @@ def main() -> int:
             "url":              GEOGRAM_GIT_URL,
             "requested_ref":    GEOGRAM_TAG,
             "resolved_commit":  geogram_commit,
-            "resolved_version": "1.10.0",
+            "resolved_version": "1.10.1",
         },
         toolchain=toolchain,
     )

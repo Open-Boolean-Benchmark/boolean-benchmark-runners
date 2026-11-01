@@ -1,15 +1,15 @@
 runner:
   family: geogram
-  version: "1.10.0"
+  version: "1.10.1"
   policy: latest
   algorithm: boolean
-  runner_id: geogram-1.10.0-boolean
-  display_name: "Geogram 1.10.0 Boolean"
+  runner_id: geogram-1.10.1-boolean
+  display_name: "Geogram 1.10.1 Boolean"
 
 upstream:
   source: git
   url: https://github.com/BrunoLevy/geogram.git
-  ref: v1.10.0
+  ref: v1.10.1
   # resolved_commit is filled in by build.py at build time
 
 build:
@@ -44,7 +44,7 @@ variants:
   - id: default
     extends: base
     label: "Default"
-    display_name: "Geogram 1.10.0"
+    display_name: "Geogram 1.10.1"
     color: "#009688"
     args: []
 
