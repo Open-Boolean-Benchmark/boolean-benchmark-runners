@@ -1,3 +1,10 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "pyyaml>=6.0",
+# ]
+# ///
 """Run the smoke request against all built runners and report a markdown table.
 
 Standalone developer utility: discovers every runner variant under ``runners/``,
