@@ -110,6 +110,30 @@ def clone_geogram(force: bool = False) -> None:
     )
 
 
+def _patch(path: Path, old: str, new: str) -> None:
+    """Apply a text-substitution patch (replaces all occurrences). Idempotent."""
+    text = path.read_text(encoding="utf-8")
+    # Check for 'already patched' FIRST — old may be a substring of new.
+    if new in text:
+        return  # already patched — skip
+    if old in text:
+        path.write_text(text.replace(old, new), encoding="utf-8")
+    else:
+        raise RuntimeError(f"Patch failed — expected text not found in {path}")
+
+
+def patch_geogram() -> None:
+    """Toolchain compatibility patches; they don't touch the boolean code.
+
+    VS 2026's STL removed <hash_map>, which the bundled PoissonRecon (dropped in
+    geogram 1.10) still includes. All uses are hash_map<K, V>, so alias it to
+    std::unordered_map.
+    """
+    _patch(GEOGRAM_CLONE / "src" / "lib" / "geogram" / "third_party" / "PoissonRecon" / "Hash.h",
+           "#include <hash_map>\nusing stdext::hash_map;",
+           "#include <unordered_map>\ntemplate <class K, class V> using hash_map = std::unordered_map<K, V>;")
+
+
 # ---------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------
@@ -174,6 +198,7 @@ def main() -> int:
 
     # Step 2: acquire upstream
     clone_geogram(force=args.force_download)
+    patch_geogram()
     geogram_commit = bh.git_commit(GEOGRAM_CLONE)
     print(f"geogram commit: {geogram_commit}")
 
