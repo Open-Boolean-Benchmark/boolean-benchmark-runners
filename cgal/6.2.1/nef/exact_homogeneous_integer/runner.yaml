@@ -1,16 +1,16 @@
 runner:
   family: cgal
-  version: "6.1.1"
+  version: "6.2.1"
   policy: latest
   algorithm: nef
   material_variant: exact_homogeneous_integer
-  runner_id: cgal-6.1.1-nef-exact-homogeneous-integer
-  display_name: "CGAL 6.1.1 Nef (Extended_homogeneous<Exact_integer>)"
+  runner_id: cgal-6.2.1-nef-exact-homogeneous-integer
+  display_name: "CGAL 6.2.1 Nef (Extended_homogeneous<Exact_integer>)"
 
 upstream:
   source: git
   url: https://github.com/CGAL/cgal.git
-  ref: v6.1.1
+  ref: v6.2.1
   # resolved_commit is filled in by build.py at build time and recorded in bin/build-info.json
 
 build:
@@ -48,14 +48,14 @@ variants:
   - id: regularized
     extends: base
     label: "Regularized (interior().closure() after each op)"
-    display_name: "CGAL 6.1.1 Nef (EH-EI, Reg)"
+    display_name: "CGAL 6.2.1 Nef (EH-EI, Reg)"
     color: "#e6e600"
     args: ["--regularize"]
 
   - id: non_regularized
     extends: base
     label: "Non-regularized (no post-op regularization)"
-    display_name: "CGAL 6.1.1 Nef (EH-EI, Non-reg)"
+    display_name: "CGAL 6.2.1 Nef (EH-EI, Non-reg)"
     color: "#bfbf00"
     args: ["--no-regularize"]
 

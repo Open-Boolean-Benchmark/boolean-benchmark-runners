@@ -6,11 +6,11 @@
 # ]
 # ///
 """
-build.py — Runner build script for cgal/6.1.1/nef/exact_homogeneous_integer
+build.py — Runner build script for cgal/6.2.1/nef/exact_homogeneous_integer
 
 Responsibilities:
   1. Bootstrap vcpkg from extern/vcpkg/ (skipped if already bootstrapped)
-  2. Clone CGAL at v6.1.1 into download/cgal/ (skipped if already present)
+  2. Clone CGAL at v6.2.1 into download/cgal/ (skipped if already present)
   3. Configure and build the adapter via CMake (vcpkg toolchain installs
      boost, gmp, mpfr, nlohmann-json automatically during configure)
   4. Write bin/build-info.json
@@ -66,7 +66,7 @@ BIN_DIR      = RUNNER_DIR / "bin"
 CGAL_CLONE   = DOWNLOAD_DIR / "cgal"
 
 CGAL_GIT_URL = "https://github.com/CGAL/cgal.git"
-CGAL_TAG     = "v6.1.1"
+CGAL_TAG     = "v6.2.1"
 
 
 
@@ -135,7 +135,7 @@ def cmake_build(mode: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build nef_runner for CGAL 6.1.1 Nef benchmark.")
+    parser = argparse.ArgumentParser(description="Build nef_runner for CGAL 6.2.1 Nef benchmark.")
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
     parser.add_argument("--clean", action="store_true",
@@ -178,7 +178,7 @@ def main() -> int:
             "url":              CGAL_GIT_URL,
             "requested_ref":    CGAL_TAG,
             "resolved_commit":  cgal_commit,
-            "resolved_version": "6.1.1",
+            "resolved_version": "6.2.1",
         },
         toolchain=toolchain,
     )

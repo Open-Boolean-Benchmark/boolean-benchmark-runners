@@ -1,16 +1,16 @@
 runner:
   family: cgal
-  version: "6.1.1"
+  version: "6.2.1"
   policy: latest
   algorithm: corefine
   material_variant: epec
-  runner_id: cgal-6.1.1-corefine-epec
-  display_name: "CGAL 6.1.1 Corefine (Exact_predicates_exact_constructions_kernel)"
+  runner_id: cgal-6.2.1-corefine-epec
+  display_name: "CGAL 6.2.1 Corefine (Exact_predicates_exact_constructions_kernel)"
 
 upstream:
   source: git
   url: https://github.com/CGAL/cgal.git
-  ref: v6.1.1
+  ref: v6.2.1
   # resolved_commit is filled in by build.py at build time and recorded in bin/build-info.json
 
 build:
@@ -48,7 +48,7 @@ variants:
   - id: default
     extends: base
     label: "Default (EPEC kernel, Surface_mesh)"
-    display_name: "CGAL 6.1.1 Corefine (EPEC)"
+    display_name: "CGAL 6.2.1 Corefine (EPEC)"
     color: "#ffff00"
     args: []
 
