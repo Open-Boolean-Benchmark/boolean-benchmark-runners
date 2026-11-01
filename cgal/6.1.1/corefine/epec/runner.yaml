@@ -1,6 +1,7 @@
 runner:
   family: cgal
   version: "6.1.1"
+  policy: latest
   algorithm: corefine
   material_variant: epec
   runner_id: cgal-6.1.1-corefine-epec

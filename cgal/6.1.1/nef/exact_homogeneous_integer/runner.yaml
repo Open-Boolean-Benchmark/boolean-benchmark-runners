@@ -1,6 +1,7 @@
 runner:
   family: cgal
   version: "6.1.1"
+  policy: latest
   algorithm: nef
   material_variant: exact_homogeneous_integer
   runner_id: cgal-6.1.1-nef-exact-homogeneous-integer

@@ -6,7 +6,9 @@ Practical guide. For concepts see [Runner Overview](Runner%20Overview.md); for s
 
 | You need | Do this |
 |---|---|
-| Different upstream library, version family, algorithm family, or executable | Create a **new folder** |
+| Different upstream library, algorithm family, or executable | Create a **new folder** |
+| Newer upstream version of an existing `latest` runner | **Bump it in place**, see [Updating a runner](#updating-a-runner) |
+| Keep an older version next to the newer one | **Pin** it, then copy, see [Updating a runner](#updating-a-runner) |
 | Different code path that would require awkward branching inside one runner | Create a **new folder** |
 | Same artifact with a runtime flag (threads, repair on/off, precision toggle, …) | Add a **runtime variant** to an existing `runner.yaml` |
 
@@ -18,7 +20,7 @@ Folder explosion makes the tree noisy. Don't create a folder for every flag.
    `runners/<family>/<version>/<algorithm>/[material-variant]/`. Omit `<algorithm>` if there's only one. See [Runner Overview](Runner%20Overview.md#folder-hierarchy).
 
 2. **Create `runner.yaml`.**
-   See the starter at the bottom of this doc. Declare a stable `runner_id` and at least one public variant with capabilities.
+   See the starter at the bottom of this doc. Declare a unique `runner_id`, `policy: latest`, and at least one public variant with capabilities.
 
 3. **Declare exact upstream provenance.**
    Pinned git commit or versioned archive with checksum. Mutable branches are not enough.
@@ -34,6 +36,24 @@ Folder explosion makes the tree noisy. Don't create a folder for every flag.
 
 7. **Verify locally.**
    Run `./build.py` and check every path in `build.outputs` exists. Invoke the runner against a small request/result pair from a recent session and confirm the output JSON parses against [Runner I/O Contract](Runner%20IO%20Contract.md).
+
+## Updating a runner
+
+Runners follow the [version policy](Runner%20Manifest%20Spec.md#version-policy): the version is always in the folder name, and `policy` says whether the folder may move.
+
+**Bumping a `latest` runner** (the normal case):
+
+1. Before changing anything, run the smoke test on the current version and keep the output for comparison (`uv run run-smoke-test.py -r <family>`).
+2. `git mv <family>/<old> <family>/<new>`.
+3. Update `runner.version`, `runner_id`, `display_name` (including per-variant `display_name`s), the `upstream` ref, and the pinned tag/commit/checksum in `build.py`.
+4. Adapt the adapter code to API changes. If what a timing field covers changes, update the `runner.yaml` notes.
+5. Rebuild, rerun the smoke test, and compare with step 1.
+6. Update the version and links in the `README.md` table.
+7. Commit rename and edits together.
+
+**Pinning a version:** set `policy: pinned` on the folder. Nothing else changes. On the next bump, copy the pinned folder to `<family>/<new>/`, set the copy to `policy: latest`, and continue from step 3. The pinned folder stays untouched.
+
+**Never** rename or bump a `pinned` runner; only fix what's needed to keep it building.
 
 ## Timing fields
 
@@ -59,7 +79,8 @@ Document your raw mesh format and what each `*_ms` field covers in `runner.yaml`
 
 - [ ] Folder path follows `runners/<family>/<version>/[<algorithm>/][<material-variant>/]`
 - [ ] `runner.yaml` has `runner`, `entry`, `variants` (required) and `upstream`, `build`, `notes` (recommended)
-- [ ] `runner_id` is unique and stable
+- [ ] `runner_id` is unique and includes the version
+- [ ] `runner.policy` is set (`latest` for new runners)
 - [ ] At least one public runtime variant declares capabilities
 - [ ] Capabilities accurately describe what the variant is designed to handle
 - [ ] `build.py` uses the `uv` shebang
@@ -99,6 +120,7 @@ Replace `<...>` placeholders.
 runner:
   family: <family>
   version: "<version>"
+  policy: latest
   algorithm: <algorithm>            # optional; omit if the runner has only one
   runner_id: <family>-<version>-<algorithm>
   display_name: "<Human Readable Name>"

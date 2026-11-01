@@ -1,6 +1,7 @@
 runner:
   family: interactive-and-robust-mesh-booleans
   version: "2024-6"
+  policy: latest
   algorithm: boolean
   runner_id: interactive-and-robust-mesh-booleans-2024-6-boolean
   display_name: "Interactive and Robust Mesh Booleans 2024-6"

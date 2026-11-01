@@ -10,7 +10,7 @@ This is the entry point for the runner docs. Schema-level detail lives in the si
 
 **Runtime variant** — a named configuration declared in `runner.yaml` that reuses the same built artifact and differs only via CLI args / env. Examples: `default`, `threads_1`, `assume_non_self_intersecting`.
 
-**Folder variant** — a separate runner folder for a materially different implementation, algorithm family, or build product. Examples: CGAL `corefine/` vs `nef/`; CGAL 5.6 vs 6.1.1.
+**Folder variant** — a separate runner folder for a materially different implementation, algorithm family, or build product. Examples: CGAL `corefine/` vs `nef/`; a pinned CGAL 5.6 next to the latest 6.1.1.
 
 **Material variant** — an additional path segment below `<algorithm>/` for distinct sub-implementations (e.g. exact vs approximate backends with substantially different code paths). Use sparingly.
 
@@ -93,9 +93,11 @@ A runner may be a native executable or a script-based wrapper (Blender, Python t
 A runner has two identities:
 
 * **Path identity** — `<family>/<version>/<algorithm>/[material-variant]`. For humans.
-* **Manifest identity** — `runner_id` declared in `runner.yaml`. Globally unique and stable. Used by the meta-runner.
+* **Manifest identity** — `runner_id` declared in `runner.yaml`. Globally unique. Used by the meta-runner.
 
 A full method identity for benchmarking purposes is `runner_id + variant_id`, e.g. `cgal-6.1.1-corefine-epec + default`.
+
+Both identities include the upstream version. A runner with `policy: latest` is bumped in place when upstream releases, so its path and `runner_id` change with the version; a runner with `policy: pinned` never moves. See [Version policy](Runner%20Manifest%20Spec.md#version-policy).
 
 ## Doc map
 

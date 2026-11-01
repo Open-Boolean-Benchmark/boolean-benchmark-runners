@@ -1,6 +1,7 @@
 runner:
   family: vtk
   version: "9.6.0"
+  policy: latest
   algorithm: boolean_polydata
   runner_id: vtk-9.6.0-boolean_polydata
   display_name: "VTK 9.6.0 BooleanOperationPolyDataFilter"

@@ -1,6 +1,7 @@
 runner:
   family: meshlib
   version: "3.1.1.211"
+  policy: latest
   algorithm: boolean
   runner_id: meshlib-3.1.1.211-boolean
   display_name: "MeshLib 3.1.1.211 Boolean"

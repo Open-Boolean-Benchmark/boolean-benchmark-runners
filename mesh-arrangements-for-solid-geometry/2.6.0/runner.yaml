@@ -1,6 +1,7 @@
 runner:
   family: mesh-arrangements-for-solid-geometry
   version: "2.6.0"
+  policy: latest
   algorithm: boolean
   material_variant: null
   runner_id: mesh-arrangements-for-solid-geometry-2.6.0-boolean

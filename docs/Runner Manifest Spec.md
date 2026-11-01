@@ -23,6 +23,7 @@ The meta-runner currently parses only `runner.runner_id`, `runner.display_name`,
 runner:
   family: cgal
   version: "6.1.1"
+  policy: latest               # latest | pinned, see "Version policy" below
   algorithm: corefine          # optional; omit when the runner has only one algorithm
   material_variant: epec       # optional sub-path segment
   runner_id: cgal-6.1.1-corefine-epec
@@ -32,13 +33,31 @@ runner:
 | Field | Required | Notes |
 |---|---|---|
 | `family` | yes (convention) | Upstream project name |
-| `version` | yes (convention) | Human-meaningful version grouping |
+| `version` | yes (convention) | Upstream version the runner currently builds. Must match the `<version>` folder name |
+| `policy` | recommended | `latest` or `pinned`, see [Version policy](#version-policy). Missing means `latest` |
 | `algorithm` | optional | Algorithm family inside the project. Omit if the runner has only one |
 | `material_variant` | optional | Used when an additional path segment under `<algorithm>/` is justified |
-| `runner_id` | **yes (parsed)** | Stable globally-unique slug. Should remain stable over time |
+| `runner_id` | **yes (parsed)** | Globally-unique slug. Stable for `pinned` runners; changes with the version for `latest` runners |
 | `display_name` | optional | Human-friendly label used in plots and reports |
 
-`runner_id` does not need to encode every path segment — it just needs to be unique and stable. `solidean-2026.1` and `cgal-6.1.1-corefine-epec` are both valid styles.
+`runner_id` does not need to encode every path segment — it just needs to be unique. `solidean-2026.1` and `cgal-6.1.1-corefine-epec` are both valid styles. Include the version so that results stay unambiguous after a bump.
+
+### Version policy
+
+The version is always explicit: in the folder name, in `runner.version`, in `runner_id` and in `display_name`. There is no `latest/` folder. Instead, `policy` states how stable a runner folder is:
+
+| Policy | Meaning |
+|---|---|
+| `latest` | Tracks upstream. May be bumped to a newer upstream version at any time: the folder is renamed (`git mv manifold/3.4.0 manifold/3.5.0`) and adapted in place, and its `version`, `runner_id`, `display_name` and `upstream` ref change with it. |
+| `pinned` | Frozen at its version. Never renamed or bumped; only changed when needed to keep it building. |
+
+Rules:
+
+* A family (per algorithm / material variant) has at most one `latest` runner, plus any number of `pinned` ones.
+* Pinning is an explicit decision: flip `policy` to `pinned` on the existing folder. The next bump then copies that folder to the new version (as `latest`) instead of renaming it.
+* A bump lands as one commit, rename plus edits, so `git log --follow` keeps the adapter's history.
+* Even a `latest` runner pins an exact upstream ref or checksum (see [`upstream`](#upstream)). Bumping means changing that pin, never following a moving branch.
+* A benchmark release is frozen by tagging the repository. Whoever refers to a `latest` runner by `runner_id` or path must expect that ID to change on the next bump; only `pinned` IDs are stable over time.
 
 ## `upstream`
 

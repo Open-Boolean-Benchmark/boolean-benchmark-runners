@@ -1,6 +1,7 @@
 runner:
   family: cork
   version: "2016-3"
+  policy: latest
   algorithm: boolean
   runner_id: cork-2016-3-boolean
   display_name: "Cork 2016-3 Boolean"

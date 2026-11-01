@@ -1,6 +1,7 @@
 runner:
   family: manifold
   version: "3.4.0"
+  policy: latest
   algorithm: boolean
   runner_id: manifold-3.4.0-boolean
   display_name: "Manifold 3.4.0 Boolean"

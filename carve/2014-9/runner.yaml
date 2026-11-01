@@ -1,6 +1,7 @@
 runner:
   family: carve
   version: "2014-9"
+  policy: latest
   algorithm: boolean
   runner_id: carve-2014-9-boolean
   display_name: "Carve 2014-9 Boolean"

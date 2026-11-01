@@ -1,6 +1,7 @@
 runner:
   family: quickcsg
   version: "2022-10"
+  policy: latest
   algorithm: boolean
   material_variant: null
   runner_id: quickcsg-2022-10-boolean

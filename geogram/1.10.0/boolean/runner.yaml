@@ -1,6 +1,7 @@
 runner:
   family: geogram
   version: "1.10.0"
+  policy: latest
   algorithm: boolean
   runner_id: geogram-1.10.0-boolean
   display_name: "Geogram 1.10.0 Boolean"

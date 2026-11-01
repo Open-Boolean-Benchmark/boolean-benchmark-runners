@@ -1,6 +1,7 @@
 runner:
   family: trueform
   version: "0.7.0"
+  policy: latest
   algorithm: boolean
   runner_id: trueform-0.7.0-boolean
   display_name: "Trueform 0.7.0 Boolean"

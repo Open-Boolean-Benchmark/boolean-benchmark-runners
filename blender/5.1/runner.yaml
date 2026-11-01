@@ -1,6 +1,7 @@
 runner:
   family: blender
   version: "5.1"
+  policy: latest
   algorithm: boolean
   runner_id: blender-5.1-boolean
   display_name: "Blender 5.1 Boolean Modifier"

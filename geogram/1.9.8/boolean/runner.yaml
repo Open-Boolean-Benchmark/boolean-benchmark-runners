@@ -1,6 +1,7 @@
 runner:
   family: geogram
   version: "1.9.8"
+  policy: pinned
   algorithm: boolean
   runner_id: geogram-1.9.8-boolean
   display_name: "Geogram 1.9.8 Boolean"
