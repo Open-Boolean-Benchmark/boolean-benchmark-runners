@@ -23,10 +23,20 @@ from __future__ import annotations
 import json
 import platform
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
+
+
+# Build scripts print non-ASCII (e.g. "→"). When stdout is redirected on Windows,
+# Python falls back to the ANSI code page (cp1252) and raises UnicodeEncodeError.
+# Every build.py imports this module before printing, so fixing the streams here
+# covers all of them without relying on PYTHONUTF8.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------
