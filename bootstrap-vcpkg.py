@@ -29,8 +29,22 @@ def get_vcpkg_paths(repo_root: Path) -> tuple[Path, Path]:
     return vcpkg_root, vcpkg_exe
 
 
+def vcpkg_tool_matches_checkout(vcpkg_root: Path, vcpkg_exe: Path) -> bool:
+    # Same check as builder_helpers: re-bootstrap when the submodule expects a newer tool.
+    metadata = vcpkg_root / "scripts" / "vcpkg-tool-metadata.txt"
+    if not metadata.exists():
+        return True
+    tag = next((line.split("=", 1)[1].strip() for line in metadata.read_text().splitlines()
+                if line.startswith("VCPKG_TOOL_RELEASE_TAG=")), None)
+    if not tag:
+        return True
+    out = subprocess.run([str(vcpkg_exe), "version", "--disable-metrics"],
+                         capture_output=True, text=True).stdout
+    return f"version {tag}-" in out
+
+
 def bootstrap_vcpkg(vcpkg_root: Path, vcpkg_exe: Path) -> None:
-    if vcpkg_exe.exists():
+    if vcpkg_exe.exists() and vcpkg_tool_matches_checkout(vcpkg_root, vcpkg_exe):
         print(f"vcpkg already bootstrapped: {vcpkg_exe}")
         return
 

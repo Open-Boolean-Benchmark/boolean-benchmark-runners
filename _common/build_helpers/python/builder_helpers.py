@@ -95,6 +95,24 @@ def vcpkg_toolchain(project_root: Path) -> Path:
 # vcpkg bootstrap
 # ---------------------------------------------------------------------------
 
+def _vcpkg_tool_matches_checkout(vr: Path, vcpkg_exe: Path) -> bool:
+    """False if vcpkg.exe predates the tool release the checked-out ports tree expects
+    (e.g. after the submodule was bumped), so it gets re-bootstrapped."""
+    metadata = vr / "scripts" / "vcpkg-tool-metadata.txt"
+    if not metadata.exists():
+        return True
+    tag = next((line.split("=", 1)[1].strip() for line in metadata.read_text().splitlines()
+                if line.startswith("VCPKG_TOOL_RELEASE_TAG=")), None)
+    if not tag:
+        return True
+    out = subprocess.run([str(vcpkg_exe), "version", "--disable-metrics"],
+                         capture_output=True, text=True).stdout
+    if f"version {tag}-" in out:
+        return True
+    print(f"vcpkg tool is outdated (checkout expects {tag}); re-bootstrapping ...")
+    return False
+
+
 def ensure_vcpkg_bootstrapped(project_root: Path, runner_dir: Path | None = None) -> None:
     vr = vcpkg_root(project_root)
     if not vr.exists():
@@ -104,7 +122,7 @@ def ensure_vcpkg_bootstrapped(project_root: Path, runner_dir: Path | None = None
         )
 
     vcpkg_exe = vr / ("vcpkg.exe" if platform.system() == "Windows" else "vcpkg")
-    if vcpkg_exe.exists():
+    if vcpkg_exe.exists() and _vcpkg_tool_matches_checkout(vr, vcpkg_exe):
         print(f"[skip] vcpkg already bootstrapped at {vcpkg_exe}")
     else:
         print(f"Bootstrapping vcpkg at {vr} ...")
