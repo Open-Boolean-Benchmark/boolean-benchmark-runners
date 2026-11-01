@@ -6,11 +6,11 @@
 # ]
 # ///
 """
-build.py — Runner build script for vtk/9.6.0/boolean_polydata
+build.py — Runner build script for vtk/9.7.1/boolean_polydata
 
 Responsibilities:
   1. Bootstrap vcpkg from extern/vcpkg/ (skipped if already bootstrapped)
-  2. Clone VTK at v9.6.0 into ../download/vtk/ (shared with loop_boolean variant;
+  2. Clone VTK at v9.7.1 into ../download/vtk/ (shared with loop_boolean variant;
      skipped if already present)
   3. Build and install a minimal VTK into ../vtk-install/ (skipped if already present)
   4. Configure and build the adapter via CMake (vcpkg toolchain installs
@@ -76,7 +76,7 @@ BUILD_DIR = RUNNER_DIR / "build"
 BIN_DIR   = RUNNER_DIR / "bin"
 
 VTK_GIT_URL = "https://github.com/Kitware/VTK.git"
-VTK_TAG     = "v9.6.0"
+VTK_TAG     = "v9.7.1"
 
 
 
@@ -212,7 +212,7 @@ def cmake_build(mode: str) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build vtk_boolean_runner for VTK 9.6.0 boolean_polydata benchmark."
+        description="Build vtk_boolean_runner for VTK 9.7.1 boolean_polydata benchmark."
     )
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
@@ -264,7 +264,7 @@ def main() -> int:
             "url":              VTK_GIT_URL,
             "requested_ref":    VTK_TAG,
             "resolved_commit":  vtk_commit,
-            "resolved_version": "9.6.0",
+            "resolved_version": "9.7.1",
         },
         toolchain=toolchain,
     )

@@ -1,15 +1,15 @@
 runner:
   family: vtk
-  version: "9.6.0"
+  version: "9.7.1"
   policy: latest
   algorithm: loop_boolean
-  runner_id: vtk-9.6.0-loop_boolean
-  display_name: "VTK 9.6.0 LoopBooleanPolyDataFilter"
+  runner_id: vtk-9.7.1-loop_boolean
+  display_name: "VTK 9.7.1 LoopBooleanPolyDataFilter"
 
 upstream:
   source: git
   url: https://github.com/Kitware/VTK.git
-  ref: v9.6.0
+  ref: v9.7.1
   # resolved_commit is filled in by build.py at build time and recorded in bin/build-info.json
 
 build:
@@ -47,7 +47,7 @@ variants:
   - id: default
     extends: base
     label: "Default"
-    display_name: "VTK 9.6.0 LoopBooleanPolyDataFilter"
+    display_name: "VTK 9.7.1 LoopBooleanPolyDataFilter"
     color: "#2a6fb0"
     args: []
 
@@ -59,4 +59,4 @@ notes:
   - "operation_ms (boolean ops): vtkLoopBooleanPolyDataFilter::Update() only."
   - "export_ms (boolean ops): result vtkPolyData → indexed-tris-f64 via point/cell traversal; excludes disk write."
   - "Empty result (0 cells) is treated as success — valid for disjoint inputs."
-  - "Shared VTK build: cloned and installed at ../vtk-install/ (runners/vtk/9.6.0/vtk-install/)."
+  - "Shared VTK build: cloned and installed at ../vtk-install/ (runners/vtk/9.7.1/vtk-install/)."
