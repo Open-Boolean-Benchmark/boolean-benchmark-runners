@@ -6,7 +6,7 @@
 # ]
 # ///
 """
-build.py — Runner build script for meshlib/3.1.1.211/boolean
+build.py — Runner build script for meshlib/3.1.4.297/boolean
 
 Steps:
   1. Download + extract the prebuilt MeshLib archive from the MeshLib GitHub
@@ -66,8 +66,11 @@ import builder_helpers as bh  # noqa: E402
 # Constants
 # ---------------------------------------------------------------------------
 
-MESHLIB_VERSION = "3.1.1.211"
+MESHLIB_VERSION = "3.1.4.297"
 RELEASE_BASE    = f"https://github.com/MeshInspector/Meshlib/releases/download/v{MESHLIB_VERSION}"
+# Since 3.1.3 the Windows dist is published per Visual Studio version (VS19/VS22/VS26).
+# VS22 binaries link from both VS 2022 and VS 2026; VS26 binaries are not guaranteed to work with VS 2022.
+WINDOWS_DIST_VS = "VS22"
 
 DOWNLOAD_DIR       = RUNNER_DIR / "download"
 BUILD_DIR          = RUNNER_DIR / "build"
@@ -95,12 +98,12 @@ _PLATFORM_ARCHIVES: dict[tuple[str, str], dict[str, str]] = {
         "url":          f"{RELEASE_BASE}/meshlib_v{MESHLIB_VERSION}_linux-vcpkg-x64.tar.xz",
     },
     ("Windows", "AMD64"): {
-        "archive_name": f"MeshLibDist_v{MESHLIB_VERSION}.zip",
-        "url":          f"{RELEASE_BASE}/MeshLibDist_v{MESHLIB_VERSION}.zip",
+        "archive_name": f"MeshLibDist{WINDOWS_DIST_VS}_v{MESHLIB_VERSION}.zip",
+        "url":          f"{RELEASE_BASE}/MeshLibDist{WINDOWS_DIST_VS}_v{MESHLIB_VERSION}.zip",
     },
     ("Windows", "x86_64"): {
-        "archive_name": f"MeshLibDist_v{MESHLIB_VERSION}.zip",
-        "url":          f"{RELEASE_BASE}/MeshLibDist_v{MESHLIB_VERSION}.zip",
+        "archive_name": f"MeshLibDist{WINDOWS_DIST_VS}_v{MESHLIB_VERSION}.zip",
+        "url":          f"{RELEASE_BASE}/MeshLibDist{WINDOWS_DIST_VS}_v{MESHLIB_VERSION}.zip",
     },
 }
 
@@ -344,7 +347,7 @@ def copy_runtime_libs(mode: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build meshlib_runner for MeshLib 3.1.1.211 boolean benchmark.")
+    parser = argparse.ArgumentParser(description="Build meshlib_runner for MeshLib 3.1.4.297 boolean benchmark.")
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
     parser.add_argument("--clean", action="store_true",

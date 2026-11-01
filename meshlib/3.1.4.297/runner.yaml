@@ -1,15 +1,15 @@
 runner:
   family: meshlib
-  version: "3.1.1.211"
+  version: "3.1.4.297"
   policy: latest
   algorithm: boolean
-  runner_id: meshlib-3.1.1.211-boolean
-  display_name: "MeshLib 3.1.1.211 Boolean"
+  runner_id: meshlib-3.1.4.297-boolean
+  display_name: "MeshLib 3.1.4.297 Boolean"
 
 upstream:
   source: git
   url: https://github.com/MeshInspector/MeshLib.git
-  ref: v3.1.1.211
+  ref: v3.1.4.297
   # resolved_commit is filled in by build.py at build time
 
 build:
@@ -44,7 +44,7 @@ variants:
   - id: default
     extends: base
     label: "Default"
-    display_name: "MeshLib 3.1.1.211"
+    display_name: "MeshLib 3.1.4.297"
     color: "#5a3fba"
     args: []
 
