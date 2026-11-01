@@ -1,16 +1,16 @@
 runner:
   family: blender
-  version: "5.1"
+  version: "5.2"
   policy: latest
   algorithm: boolean
-  runner_id: blender-5.1-boolean
-  display_name: "Blender 5.1 Boolean Modifier"
+  runner_id: blender-5.2-boolean
+  display_name: "Blender 5.2 Boolean Modifier"
 
 upstream:
   source: archive
-  url: https://download.blender.org/release/Blender5.1/
-  version: 5.1.0
-  notes: "Platform-specific archives; SHA-256 verified against blender-5.1.0.sha256. See build.py for URLs."
+  url: https://download.blender.org/release/Blender5.2/
+  version: 5.2.3
+  notes: "Platform-specific archives; SHA-256 verified against blender-5.2.3.sha256. See build.py for URLs."
 
 build:
   script: ./build.py
@@ -43,21 +43,21 @@ variants:
   - id: exact
     extends: base
     label: "Exact solver"
-    display_name: "Blender 5.1 Boolean (Exact)"
+    display_name: "Blender 5.2 Boolean (Exact)"
     color: "#f4792b"
     args: ["--solver", "EXACT"]
 
   - id: fast
     extends: base
     label: "Fast solver"
-    display_name: "Blender 5.1 Boolean (Fast)"
+    display_name: "Blender 5.2 Boolean (Fast)"
     color: "#ff9a5a"
     args: ["--solver", "FLOAT"]
 
   # - id: manifold
   #   extends: base
   #   label: "Manifold solver"
-  #   display_name: "Blender 5.1 Boolean (Manifold)"
+  #   display_name: "Blender 5.2 Boolean (Manifold)"
   #   args: ["--solver", "MANIFOLD"]
 
 notes:

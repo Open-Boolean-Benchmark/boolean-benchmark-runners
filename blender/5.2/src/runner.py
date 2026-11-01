@@ -1,5 +1,5 @@
 """
-runner.py — Blender 5.1 Boolean Modifier runner (runs inside Blender's Python).
+runner.py — Blender 5.2 Boolean Modifier runner (runs inside Blender's Python).
 
 Execution contract:
     blender --background --factory-startup --python runner.py -- \\

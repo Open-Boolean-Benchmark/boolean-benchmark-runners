@@ -6,22 +6,22 @@
 # ]
 # ///
 """
-build.py — Runner build script for blender/5.1/boolean
+build.py — Runner build script for blender/5.2/boolean
 
 Responsibilities:
   1. Detect the current platform (Linux x64, Windows x64, Windows arm64).
-  2. Download the platform-specific Blender 5.1.0 archive from
-       https://download.blender.org/release/Blender5.1/
-  3. Validate the archive against the official blender-5.1.0.sha256 checksum file.
+  2. Download the platform-specific Blender 5.2.3 archive from
+       https://download.blender.org/release/Blender5.2/
+  3. Validate the archive against the official blender-5.2.3.sha256 checksum file.
   4. Extract the archive into download/blender/ (top-level directory stripped).
   5. Write bin/build-info.json.
 
 No CMake, no C++, no vcpkg — Blender ships its own Python runtime.
 
 Platforms:
-  - Linux x64   → blender-5.1.0-linux-x64.tar.xz
-  - Windows x64 → blender-5.1.0-windows-x64.zip
-  - Windows arm64 → blender-5.1.0-windows-arm64.zip
+  - Linux x64   → blender-5.2.3-linux-x64.tar.xz
+  - Windows x64 → blender-5.2.3-windows-x64.zip
+  - Windows arm64 → blender-5.2.3-windows-arm64.zip
   - macOS       → not supported (DMG extraction requires hdiutil; add later)
 
 Usage:
@@ -69,8 +69,8 @@ import builder_helpers as bh  # noqa: E402
 # Constants
 # ---------------------------------------------------------------------------
 
-BLENDER_VERSION = "5.1.0"
-BASE_URL        = "https://download.blender.org/release/Blender5.1"
+BLENDER_VERSION = "5.2.3"
+BASE_URL        = "https://download.blender.org/release/Blender5.2"
 SHA256_FILENAME = f"blender-{BLENDER_VERSION}.sha256"
 
 DOWNLOAD_DIR = RUNNER_DIR / "download"

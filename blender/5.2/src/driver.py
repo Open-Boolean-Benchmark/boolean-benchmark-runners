@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run
 """
-driver.py — Blender 5.1 Boolean runner entry point.
+driver.py — Blender 5.2 Boolean runner entry point.
 
 Locates the downloaded Blender binary in download/blender/ (relative to the
 runner root, one level above this script's src/ directory) and invokes it as a subprocess:
