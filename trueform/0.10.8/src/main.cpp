@@ -185,7 +185,7 @@ static json execute_run(runner_utils::Config const& /*cfg*/, json const& run_req
 
                     // Boolean phase — timed as operation_ms.
                     Timer op_timer;
-                    auto [result, labels] = tf::make_boolean(lhs.polygons(), rhs.polygons(), to_tf_op(kind));
+                    auto [result, labels, face_labels] = tf::make_boolean(lhs.polygons(), rhs.polygons(), to_tf_op(kind));
                     double const operation_ms = op_timer.elapsed_ms();
 
                     // Export phase — timed as export_ms (conversion only).

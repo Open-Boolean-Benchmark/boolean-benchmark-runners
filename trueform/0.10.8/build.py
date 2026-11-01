@@ -6,11 +6,11 @@
 # ]
 # ///
 """
-build.py — Runner build script for trueform/0.7.0/boolean
+build.py — Runner build script for trueform/0.10.8/boolean
 
 Responsibilities:
   1. Bootstrap vcpkg from extern/vcpkg/ (skipped if already bootstrapped)
-  2. Clone trueform at v0.7.0 into download/trueform/ (skipped if already present)
+  2. Clone trueform at v0.10.8 into download/trueform/ (skipped if already present)
   3. Configure and build the adapter via CMake (vcpkg toolchain installs
      tbb and nlohmann-json automatically during configure; trueform itself is
      header-only and included directly via TRUEFORM_SOURCE_DIR)
@@ -67,7 +67,7 @@ BIN_DIR         = RUNNER_DIR / "bin"
 TRUEFORM_CLONE  = DOWNLOAD_DIR / "trueform"
 
 TRUEFORM_GIT_URL = "https://github.com/polydera/trueform.git"
-TRUEFORM_TAG     = "v0.7.0"
+TRUEFORM_TAG     = "v0.10.8"
 
 
 
@@ -136,7 +136,7 @@ def cmake_build(mode: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build trueform_runner for trueform 0.7.0 boolean benchmark.")
+    parser = argparse.ArgumentParser(description="Build trueform_runner for trueform 0.10.8 boolean benchmark.")
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
     parser.add_argument("--clean", action="store_true",
@@ -180,7 +180,7 @@ def main() -> int:
             "url":              TRUEFORM_GIT_URL,
             "requested_ref":    TRUEFORM_TAG,
             "resolved_commit":  trueform_commit,
-            "resolved_version": "0.7.0",
+            "resolved_version": "0.10.8",
         },
         toolchain=toolchain,
     )

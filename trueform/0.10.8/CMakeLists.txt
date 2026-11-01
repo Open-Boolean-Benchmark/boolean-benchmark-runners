@@ -33,6 +33,11 @@ set(COMMON_INCLUDE_DIR "${PROJECT_ROOT}/_common/cpp/include")
 include("${PROJECT_ROOT}/_common/cpp/cmake/runner_simd.cmake")
 runner_enable_simd(trueform_runner)
 
+# trueform's exact arrangement pipeline (>= 0.8) exceeds MSVC's default object section limit.
+if(MSVC)
+  target_compile_options(trueform_runner PRIVATE /bigobj)
+endif()
+
 target_include_directories(trueform_runner PRIVATE
   "${TRUEFORM_SOURCE_DIR}/include"
   ${CMAKE_CURRENT_SOURCE_DIR}/src

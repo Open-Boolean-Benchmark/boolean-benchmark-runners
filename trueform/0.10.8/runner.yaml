@@ -1,15 +1,15 @@
 runner:
   family: trueform
-  version: "0.7.0"
+  version: "0.10.8"
   policy: latest
   algorithm: boolean
-  runner_id: trueform-0.7.0-boolean
-  display_name: "Trueform 0.7.0 Boolean"
+  runner_id: trueform-0.10.8-boolean
+  display_name: "Trueform 0.10.8 Boolean"
 
 upstream:
   source: git
   url: https://github.com/polydera/trueform.git
-  ref: v0.7.0
+  ref: v0.10.8
   # resolved_commit is filled in by build.py at build time
 
 build:
@@ -44,7 +44,7 @@ variants:
   - id: default
     extends: base
     label: "Default"
-    display_name: "Trueform 0.7.0"
+    display_name: "Trueform 0.10.8"
     color: "#00d4bd"
     args: []
 
@@ -55,3 +55,4 @@ notes:
   - "import_ms (load-mesh): f64→f32 cast + tf::make_points/make_faces/make_polygons"
   - "export_ms (boolean ops): polygon vertex/face extraction + f32→f64 cast, excludes disk write"
   - "Boolean ops: tf::make_boolean(lhs, rhs, tf::boolean_op::merge/intersection/difference)"
+  - "operation_ms (boolean ops): tf::make_boolean() call only. Since trueform 0.8 this runs the exact integer arrangement pipeline, so it includes the internal f32 → integer conversion and the integer → f32 output"
