@@ -6,11 +6,11 @@
 # ]
 # ///
 """
-build.py — Runner build script for manifold/3.4.0/boolean
+build.py — Runner build script for manifold/3.5.4/boolean
 
 Responsibilities:
   1. Bootstrap vcpkg from extern/vcpkg/ (skipped if already bootstrapped)
-  2. Clone manifold at v3.4.0 into download/manifold/ (skipped if already present)
+  2. Clone manifold at v3.5.4 into download/manifold/ (skipped if already present)
   3. Configure and build the adapter via CMake (vcpkg toolchain installs
      nlohmann-json automatically during configure; manifold itself is built via
      add_subdirectory inside CMakeLists.txt)
@@ -67,7 +67,7 @@ BIN_DIR        = RUNNER_DIR / "bin"
 MANIFOLD_CLONE = DOWNLOAD_DIR / "manifold"
 
 MANIFOLD_GIT_URL = "https://github.com/elalish/manifold.git"
-MANIFOLD_TAG     = "v3.4.0"
+MANIFOLD_TAG     = "v3.5.4"
 
 
 
@@ -136,7 +136,7 @@ def cmake_build(mode: str) -> None:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build manifold_runner for manifold 3.4.0 boolean benchmark.")
+    parser = argparse.ArgumentParser(description="Build manifold_runner for manifold 3.5.4 boolean benchmark.")
     parser.add_argument("--mode", default="release", choices=["release", "debug"],
                         help="Build mode (default: release)")
     parser.add_argument("--clean", action="store_true",
@@ -180,7 +180,7 @@ def main() -> int:
             "url":              MANIFOLD_GIT_URL,
             "requested_ref":    MANIFOLD_TAG,
             "resolved_commit":  manifold_commit,
-            "resolved_version": "3.4.0",
+            "resolved_version": "3.5.4",
         },
         toolchain=toolchain,
     )
