@@ -70,7 +70,7 @@ Only the `runner.yaml` is mandatory, the rest depends on the runner type. A comm
 
 * `uv run build-all.py -y` builds all runners, accepting all licenses (can take 30+ min cold)
   (`-y` means you accept all licenses, including the free non-commercial licenses of each runner;
-  omit `-y` to be prompted interactively where required)
+  omit `-y` to be prompted interactively where required; `--latest-only` skips pinned runners)
 * `uv run bootstrap-vcpkg.py` (optional, pre-warms vcpkg packages for all runners, 60+ min cold)
 * `uv run run-smoke-test.py` runs every built runner against the cube-minus-cube smoke case and prints a results table (`-r <pattern>` to filter by slug/name, repeatable)
 
