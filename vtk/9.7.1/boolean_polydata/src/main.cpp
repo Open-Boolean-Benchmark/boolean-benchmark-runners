@@ -33,6 +33,7 @@
 #include <vtkCleanPolyData.h>
 #include <vtkIdList.h>
 #include <vtkNew.h>
+#include <vtkOutputWindow.h>
 #include <vtkPoints.h>
 #include <vtkPolyData.h>
 #include <vtkSmartPointer.h>
@@ -387,6 +388,11 @@ static json execute_run(runner_utils::Config const& /*cfg*/, json const& run_req
 
 int main(int argc, char** argv)
 {
+    // Headless: never open VTK's output window (vtkWin32OutputWindow on Windows);
+    // route every VTK message to stderr instead.
+    vtkOutputWindow::GetInstance()->ShowWindowOff();
+    vtkOutputWindow::GetInstance()->SetDisplayModeToAlwaysStdErr();
+
     runner_utils::Config const cfg = runner_utils::parse_args(argc, argv, "vtk_boolean_runner");
     return runner_utils::run_main_loop(cfg, execute_run);
 }
